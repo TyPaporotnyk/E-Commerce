@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    path('jet/', include('jet.urls', 'jet')),  # Django JET URLS
     path("admin/", admin.site.urls),
     path("", include('home.urls')),
     path("", include('cart.urls'))
