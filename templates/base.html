@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/x-icon" href="{% static 'ico/icon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <title>Kandibober</title>
+</head>
+<body>
+    <header>
+        <nav class="menu-center">
+            <div class="menu-center-left">
+                <a class="logo"  href="/"><img src="{% static 'img/logo.jpg' %}" alt=""></a>
+                <ul class="menu-center-main" id="menu-center-main">
+                    <li class="menu-center-left-item">
+                        <a href="/">Продукты</a>
+                    </li>
+                    <li class="menu-center-left-item">
+                        <a href="/">О нас</a>
+                    </li>
+                    <li class="menu-center-left-item">
+                        <a href="/">Downloads</a>
+                    </li>
+                    <li class="menu-center-left-item">
+                        <a href="/">Professional area</a>
+                    </li>
+                </ul>
+            </div>
+            <ul class="menu-center-right" id="menu-center-right">
+                <li class="menu-center-right-item">
+                    <div class="cart">
+                        <a href="/cart">
+                            <span class="material-icons">
+                                shopping_cart
+                            </span>
+                        </a>
+                    </div>
+                </li>
+                <li class="menu-center-right-item">
+                    <a href="/admin">
+                        <span class="material-icons">
+                            person
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    {% block content %}
+    {% endblock content %}
+    <footer>
+        <a href="/"><img src="{% static 'img/logo.jpg' %}" alt=""></a>
+        <span class="text">© 2023 kandibober.ua</span>
+    </footer>
+</body>
+<script src="{% static 'js/main.js' %}"></script>
+</html>

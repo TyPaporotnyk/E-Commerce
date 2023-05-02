@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% block content %}
+<main class="cart" id="cart">
+    <div class="container">
+        {% if products|length > 0 %}
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="cart-image"></th>
+                        <th class="cart-product">Продукт</th>
+                        <th class="cart-price">Цена</th>
+                        <th class="cart-discount">Скидочная цена</th>
+                        <th class="cart-full-price">Цена со скидкой</th>
+                        <th class="cart-quantity">Количество товаров</th>
+                        <th class="cart-produc-code">Код товара</th>
+                        <th class="cart-close"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr class="item" data-product-id="{{product.id}}">
+                        <th class="cart-image"><img src="{{product.img.url}}" alt=""></th>
+                        <th class="cart-product">{{product.fields.title}}</th>
+                        <th class="cart-price">{{product.price}} ₴</th>
+                        <th class="cart-discount">
+                            {% if product.discount_price %}
+                                {{product.discount_price}} ₴
+                            {% else %}
+                                0 ₴
+                            {% endif %}
+                        </th>
+                        <th class="cart-discount">
+                            {% if product.discount_price %}
+                                {{product.discount_price}} ₴
+                            {% else %}
+                                {{product.price}} ₴
+                            {% endif %}
+                        </th>
+                        <th class="cart-quantity">
+                            <select name="quantity" id="quantity">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </th>
+                        <th class="cart-produc-code">{{product.id}}</th>
+                        <th class="cart-close">
+                            <button class="delete-button" id="delete-button" onclick="deleteProductFromCart('{{product.id}}')">
+                                <span class="material-icons">
+                                    close
+                                </span>
+                            </button>
+                        </th>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="make-order">
+            <form class="form" id="make-order" action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="left-form">
+                    <div class="form__group">
+                        <label for="order-name">Имя</label>
+                        <input type="text" name="surname" id="surname">
+                    </div>
+                    <div class="form__group">
+                        <label for="order-name">Фамилия</label>
+                        <input type="text" name="surname" id="surname">
+                    </div>
+                    <div class="form__group" id="email">
+                        <label for="order-name">Номер Телефона</label>
+                        <input type="text" name="surname" id="surname">
+                    </div>
+                    <div class="form__group" id="phone">
+                        <label for="order-name">Почта</label>
+                        <input type="text" name="surname" id="surname">
+                    </div>
+                </div>
+                
+                <div class="form__group" id="message">
+                    <label for="message_to">Сообщение<span id="bold-text">Сообщение должно быть из шаблона</span></label>
+                    <textarea name="message_to" id="message_to"
+                        placeholder="Введите сообщение которое получит пользователь"
+                        required="True"></textarea>
+                </div>
+                <div class="form__action">
+                    <button class="btn btn--main" type="submit">Создать рассылку</button>
+                </div>
+            </form>
+        </div>
+        {% else %}
+        <div class="info-message">
+            Корзина пуста, выберите товар и добавьте к корзину
+        </div>
+        {% endif %}
+    </div>
+</main>
+{% endblock %}
