@@ -2,7 +2,7 @@
 {% block content %}
 <main class="cart" id="cart">
     <div class="container">
-        {% if products|length > 0 %}
+        <!-- {% if products|length > 0 %} -->
         <div class="table-responsive">
             <table>
                 <thead>
@@ -18,7 +18,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for product in products %}
+                    {% for product, quantity in products %}
                     <tr class="item" data-product-id="{{product.id}}">
                         <th class="cart-image"><img src="{{product.img.url}}" alt=""></th>
                         <th class="cart-product">{{product.fields.title}}</th>
@@ -38,17 +38,17 @@
                             {% endif %}
                         </th>
                         <th class="cart-quantity">
-                            <select name="quantity" id="quantity">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
+                            <select name="quantity" id="quantity" onchange="updateProductQuantity(this, '{{product.id}}')">
+                                <option value="1" {% if quantity == 1 %}selected{% endif %}>1</option>
+                                <option value="2" {% if quantity == 2 %}selected{% endif %}>2</option>
+                                <option value="3" {% if quantity == 3 %}selected{% endif %}>3</option>
+                                <option value="4" {% if quantity == 4 %}selected{% endif %}>4</option>
+                                <option value="5" {% if quantity == 5 %}selected{% endif %}>5</option>
+                                <option value="6" {% if quantity == 6 %}selected{% endif %}>6</option>
+                                <option value="7" {% if quantity == 7 %}selected{% endif %}>7</option>
+                                <option value="8" {% if quantity == 8 %}selected{% endif %}>8</option>
+                                <option value="9" {% if quantity == 9 %}selected{% endif %}>9</option>
+                                <option value="10" {% if quantity == 10 %}selected{% endif %}>10</option>
                             </select>
                         </th>
                         <th class="cart-produc-code">{{product.id}}</th>
@@ -67,41 +67,60 @@
         <div class="make-order">
             <form class="form" id="make-order" action="" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                <div class="left-form">
-                    <div class="form__group">
-                        <label for="order-name">Имя</label>
-                        <input type="text" name="surname" id="surname">
+                <div class="form-info">
+                    <div class="left-form">
+                        <div class="form__group">
+                            <label for="order-name">Имя</label>
+                            {{ form.name }}
+                        </div>
+                        <div class="form__group">
+                            <label for="order-name">Фамилия</label>
+                            {{ form.surname }}
+                        </div>
+                        <div class="form__group">
+                            <label for="order-name">Номер Телефона</label>
+                            {{ form.phone_number }}
+                        </div>
+                        <div class="form__group">
+                            <label for="order-name">Почта</label>
+                            {{ form.email }}
+                        </div>
                     </div>
-                    <div class="form__group">
-                        <label for="order-name">Фамилия</label>
-                        <input type="text" name="surname" id="surname">
-                    </div>
-                    <div class="form__group" id="email">
-                        <label for="order-name">Номер Телефона</label>
-                        <input type="text" name="surname" id="surname">
-                    </div>
-                    <div class="form__group" id="phone">
-                        <label for="order-name">Почта</label>
-                        <input type="text" name="surname" id="surname">
+
+                    <div class="line"></div>
+
+                    <div class="right-form">
+                        <div class="form__group">
+                            <label for="order-name">Город</label>
+                            {{ form.city }}
+                        </div>
+                        <div class="form__group">
+                            <label for="order-name">Улица</label>
+                            {{ form.street }}
+                        </div>
+                        <div class="form__group" id="email">
+                            <label for="order-name">Дом</label>
+                            {{ form.house_number }}
+                        </div>
+                        <div class="form__group" id="phone">
+                            <label for="order-name">Отделение Новой почты</label>
+                            {{ form.post_office }}
+                        </div>
                     </div>
                 </div>
                 
-                <div class="form__group" id="message">
-                    <label for="message_to">Сообщение<span id="bold-text">Сообщение должно быть из шаблона</span></label>
-                    <textarea name="message_to" id="message_to"
-                        placeholder="Введите сообщение которое получит пользователь"
-                        required="True"></textarea>
-                </div>
                 <div class="form__action">
-                    <button class="btn btn--main" type="submit">Создать рассылку</button>
+                    <button class="make-order-button" id="make-order-button" type="submit">Заказать</button>
                 </div>
             </form>
         </div>
-        {% else %}
+        <!-- {% else %} -->
         <div class="info-message">
             Корзина пуста, выберите товар и добавьте к корзину
         </div>
-        {% endif %}
+        <!-- {% endif %} -->
+        <div id="layout__boxFooter" class="layout__boxFooter">
+        </div>
     </div>
 </main>
 {% endblock %}

@@ -26,9 +26,10 @@
                         </span>
                     </div>
                     <ul class="filter-panel-item-content" id="price-filter">
-                        <li class="filter-panel-item-content-selector"><a href="{{request.path}}0-500/">От 0 -  До 500</a></li>
-                        <li class="filter-panel-item-content-selector"><a href="{{request.path}}500-1000/">От 500 - До 1000</a></li>
-                        <li class="filter-panel-item-content-selector"><a href="{{request.path}}1000-3000/">От 1000 - До 3000</a></li>
+                        <li class="filter-panel-item-content-selector" data-test="price" data-test-item="all"><a href="/">Нет</a></li>
+                        <li class="filter-panel-item-content-selector" data-test="price" data-test-item="0-500"><a href="/">От 0 - До 500</a></li>
+                        <li class="filter-panel-item-content-selector" data-test="price" data-test-item="500-1000"><a href="/">От 500 - До 1000</a></li>
+                        <li class="filter-panel-item-content-selector" data-test="price" data-test-item="1000-3000"><a href="/">От 1000 - До 3000</a></li>
                     </ul>
                 </li>
                 <li class="filter-panel-item">
@@ -39,10 +40,10 @@
                         </span>
                     </div>
                     <ul class="filter-panel-item-content" id="brand-filter">
-                        <li class="filter-panel-item-content-selector"><a href="{{request.path}}all/">The North Face</a></li>
-                        <li class="filter-panel-item-content-selector"><a href="{{request.path}}all/">Nike</a></li>
-                        <li class="filter-panel-item-content-selector"><a href="{{request.path}}all/">Puma</a></li>
-                        <li class="filter-panel-item-content-selector"><a href="{{request.path}}all/">No name</a></li>
+                        <li class="filter-panel-item-content-selector" data-test="brand" data-test-item="all"><a href="/">Нет</a></li>
+                        {% for brand in products_brand %}
+                            <li class="filter-panel-item-content-selector" data-test="brand" data-test-item="{{brand.alternative_name}}"><a href="/">{{brand.name}}</a></li>
+                        {% endfor %}
                     </ul>
                 </li>
             </ul>
@@ -54,11 +55,10 @@
                         expand_more
                     </span>
                 </div>
-                <ul class="filter-panel-item-content" id="type-filter">
-                    <li class="filter-panel-item-content-selector"><a href="/home/all/">Все</a></li>
-                    <li class="filter-panel-item-content-selector"><a href="/home/all/">Все</a></li>
-                    <li class="filter-panel-item-content-selector"><a href="/home/all/">Все</a></li>
-                    <li class="filter-panel-item-content-selector"><a href="/home/all/">Все</a></li>
+                <ul class="filter-panel-item-content" id="ordering-filter">
+                    <li class="filter-panel-item-content-selector" data-test="price-order" data-test-item="all"><a href="/">Нет</a></li>
+                    <li class="filter-panel-item-content-selector" data-test="price-order" data-test-item="up"><a href="/">Цена: от меньшей к большей</a></li>
+                    <li class="filter-panel-item-content-selector" data-test="price-order" data-test-item="down"><a href="/">Цена: от большей к меньшей</a></li>
                 </ul>
             </div>
         </div>
@@ -69,9 +69,14 @@
                 <div class="list-products-item">
                     <a class="list-products-img" href="/product/{{product.id}}/">
                         <img src="{{ product.img.url }}"/>
-                        <div class="img-overlay"></div>
-                        {% if product.discount_price > 0 %}
-                        <div class="overlay-discount">Скидка</div>
+                        {% if product.quantity > 0%}
+                            <div class="img-overlay"></div>
+                            {% if product.discount_price > 0 %}
+                            <div class="overlay-discount">Скидка</div>
+                            {% endif %}
+                        {% else %}
+                            <div class="img-overlay active"></div>
+                            <div class="overlay-text">SOLD OUT</div>
                         {% endif %}
                     </a>
                     <div class="list-products-caption">

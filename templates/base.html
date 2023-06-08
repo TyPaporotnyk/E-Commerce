@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    {% csrf_token %}
+    
     <link rel="icon" type="image/x-icon" href="{% static 'ico/icon.ico' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -28,11 +29,36 @@
                     <li class="menu-center-left-item">
                         <a href="/">О нас</a>
                     </li>
+                </ul>
+            </div>
+            <ul class="menu-center-right" id="menu-center-right">
+                <li class="menu-center-right-item">
+                    <div class="cart">
+                        <a href="/cart">
+                            <span class="material-icons">
+                                shopping_cart
+                            </span>
+                        </a>
+                    </div>
+                </li>
+                <li class="menu-center-right-item">
+                    <a href="/admin">
+                        <span class="material-icons">
+                            person
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <nav class="menu-center">
+            <div class="menu-center-left">
+                <a class="logo"  href="/"><img src="{% static 'img/logo.jpg' %}" alt=""></a>
+                <ul class="menu-center-main" id="menu-center-main">
                     <li class="menu-center-left-item">
-                        <a href="/">Downloads</a>
+                        <a href="/">Продукты</a>
                     </li>
                     <li class="menu-center-left-item">
-                        <a href="/">Professional area</a>
+                        <a href="/">О нас</a>
                     </li>
                 </ul>
             </div>

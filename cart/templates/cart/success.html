@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<main class="cart" id="cart">
+<div class="container">
+    <div class="order-info">
+            <h1>Ваш заказ был сформирован</h1>
+            <h2>Ожидайте звонка или сообщения на почту</h2>
+            <p>Номер заказа: {{ order.id }}</p>
+            <p>{{ order.created_at }}</p>
+    </div>
+</div>
+</main>
+{% endblock %}
