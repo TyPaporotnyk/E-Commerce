@@ -1,13 +1,11 @@
 from django.contrib import admin
-from django.utils.safestring import mark_safe
 
-from .models import Product, ProductBrand, ProductType
+from .models import Product, ProductBrand, ProductImg, ProductSize, ProductType, Size
 
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = [
-        "get_img",
         "title",
         "product_type",
         "price",
@@ -18,19 +16,13 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ["product_type", "brand"]
     list_display_links = ["title"]
     search_fields = ["title"]
-    readonly_fields = ["get_img"]
-
-    def get_img(self, obj):
-        return mark_safe(f'<img src={obj.img.url} width="175px" height="auto">')
-
-    get_img.short_description = "Изображение товара"
 
 
 @admin.register(ProductType)
 class ProductTypeAdmin(admin.ModelAdmin):
-    list_display = ["title"]
-    list_display_links = ["title"]
-    search_fields = ["title"]
+    list_display = ["name"]
+    list_display_links = ["name"]
+    search_fields = ["name"]
 
 
 @admin.register(ProductBrand)
@@ -38,3 +30,8 @@ class ProductBrandAdmin(admin.ModelAdmin):
     list_display = ["name"]
     list_display_links = ["name"]
     search_fields = ["name"]
+
+
+admin.site.register(ProductImg)
+admin.site.register(ProductSize)
+admin.site.register(Size)
