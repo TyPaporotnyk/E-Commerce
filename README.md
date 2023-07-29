@@ -1,6 +1,6 @@
 # Shop
 
-# Run
+# Run database
 
 ```bash
 docker-compose up -d

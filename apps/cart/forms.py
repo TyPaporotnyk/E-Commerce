@@ -1,12 +1,10 @@
 from django import forms
 from phonenumber_field.formfields import PhoneNumberField
-from phonenumber_field.formfields import PhoneNumberField
-from django.utils.translation import gettext_lazy as _
 
 
 class OrderForm(forms.Form):
-    name = forms.CharField(max_length=100)   
-    surname = forms.CharField(max_length=100) 
+    name = forms.CharField(max_length=100)
+    surname = forms.CharField(max_length=100)
     phone_number = PhoneNumberField()
     email = forms.EmailField()
 
