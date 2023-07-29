@@ -1,76 +1,17 @@
 version: '3.9'
 
 services:
-  # webserver:
-  #   image: nginx:1.22.0
-  #   container_name: webserver
-  #   restart: always
-  #   ports:
-  #     - 80:80
-  #     - 443:443
-  #   volumes:
-  #     - ./logs/nginx/:/var/log/nginx/
-  #     - ./nginx/ssl/:/etc/nginx/ssl/:ro
-  #     - ./nginx/configs/:/etc/nginx/sites-enabled/:ro
-  #     - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-  #     - ./app/src/collectedstatic/:/var/www/app/static/
-  # db:
-  #   image: mariadb:10.7
-  #   container_name: db
-  #   restart: always
-  #   volumes:
-  #     - db:/var/lib/mysql
-  #   environment:
-  #     MYSQL_USER: ${MYSQL_USER}
-  #     MYSQL_DATABASE: ${MYSQL_DATABASE}
-  #     MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-  #     MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-  #   ports:
-  #     - "3306:3306"
-
-  app:
-    build: ./
-    container_name: app
-    restart: always
-    # volumes:
-    #   - ./app/.env:/src/.env:ro
-    #   - ./logs/gunicorn/:/var/log/gunicorn/
-    #   - ./app/src/collectedstatic:/app/collectedstatic
-    #   - ./app/src/media:/app/media
-    # depends_on:
-    #   - db
-
-  # telegram:
-  #   build:
-  #     context: ./app
-  #     dockerfile: Dockerfile.telegram
-  #   container_name: telegrammailing
-  #   restart: always
-  #   volumes:
-  #     - ./app/.env:/src/.env:ro
-  #     - ./app/src/media:/app/media
-  #   depends_on:
-  #     - db
-
-  # whatsapp:
-  #   build:
-  #     context: ./app
-  #     dockerfile: Dockerfile.whatsapp
-  #   container_name: whatsappmailing
-  #   restart: always
-  #   volumes:
-  #     - ./app/.env:/src/.env:ro
-  #     - ./app/src/media:/app/media
-  #   depends_on:
-  #     - db
-
-  # adminer:
-  #   image: dockette/adminer:mysql
-  #   container_name: adminer
-  #   restart: always
-  #   environment:
-  #     UPLOAD: ${ADM_UPLOAD}
+  db:
+    container_name: 'database'
+    image: postgres:15.3-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_DB: '${POSTGRES_DB}'
+      POSTGRES_USER: '${POSTGRES_USER}'
+      POSTGRES_PASSWORD: '${POSTGRES_PASSWORD}'
+    ports:
+      - '5432:5432'
 
 volumes:
-  db:
-  env-app:
+  postgres_data:
