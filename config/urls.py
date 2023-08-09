@@ -6,8 +6,7 @@ from django.urls import include, path
 urlpatterns = [
     path("jet/", include("jet.urls", "jet")),  # Django JET URLS
     path("admin/", admin.site.urls),
-    path("", include("apps.home.urls")),
-    path("", include("apps.cart.urls")),
+    path("api/v1/", include("src.routes")),
 ]
 
 if settings.DEBUG:
