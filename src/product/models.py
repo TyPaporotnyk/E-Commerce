@@ -1,12 +1,14 @@
-import os
-
 from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.db.models.signals import post_delete, pre_save
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 
-from src.base.services import get_new_product_img_path, validate_size_image
+from src.base.services import (
+    get_new_product_img_path,
+    validate_size_image,
+    delete_old_file,
+)
 
 
 class Product(models.Model):
@@ -39,7 +41,7 @@ class Product(models.Model):
     @property
     def current_price(self):
         return (
-            self.price - (self.price / 100 - self.discount_percent)
+            self.price - (self.price / 100 * self.discount_percent)
             if self.discount_percent
             else self.price
         )
@@ -99,8 +101,7 @@ def delete_file_on_delete(sender, instance, **kwargs):
     Auto delete file after deleting model
     """
     if instance.img:
-        if os.path.isfile(instance.img.path):
-            os.remove(instance.img.path)
+        delete_old_file(instance.img.path)
 
 
 @receiver(pre_save, sender=ProductImg)
@@ -118,5 +119,4 @@ def delete_file_on_change(sender, instance, **kwargs):
 
     new_file = instance.img
     if not old_file == new_file:
-        if os.path.isfile(old_file.path):
-            os.remove(old_file.path)
+        delete_old_file(old_file.path)
