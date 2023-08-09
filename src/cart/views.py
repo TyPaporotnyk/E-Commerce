@@ -1,8 +1,8 @@
 from rest_framework import viewsets
 
-from src.cart.serializers import CartSerializer, CartProductSerializer
-from src.cart.utils import CartManager
 from src.cart.repositories import CartProductRepository
+from src.cart.serializers import CartProductSerializer, CartSerializer
+from src.cart.utils import CartManager
 
 
 class CartView(viewsets.ModelViewSet):
