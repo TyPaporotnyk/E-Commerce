@@ -22,4 +22,5 @@ urlpatterns = [
     path("redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
     path("product/", include("src.product.urls")),
     path("cart/", include("src.cart.urls")),
+    path("order/", include("src.order.urls")),
 ]

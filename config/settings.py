@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "drf_yasg",
     "src.product",
     "src.cart",
+    "src.order",
 ]
 
 MIDDLEWARE = [

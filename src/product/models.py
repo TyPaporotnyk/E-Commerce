@@ -5,9 +5,9 @@ from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 
 from src.base.services import (
+    delete_old_file,
     get_new_product_img_path,
     validate_size_image,
-    delete_old_file,
 )
 
 

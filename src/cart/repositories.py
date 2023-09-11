@@ -24,3 +24,9 @@ class CartRepository:
             cart = cls.create()
 
         return cart
+
+
+class CartProductRepository:
+    @classmethod
+    def get(cls, cart):
+        return cart.products
